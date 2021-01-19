@@ -1,0 +1,2 @@
+# aws-cloudshell
+cloudshell addons
