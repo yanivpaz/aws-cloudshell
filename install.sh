@@ -1,8 +1,16 @@
 # curl -s https://raw.githubusercontent.com/yanivpaz/aws-cloudshell/main/install.sh |bash
-curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
-chmod +x ./kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
 
-aws eks list-clusters --output text | awk '{print $2}'
+if [ ! -f /usr/local/bin/kubectl ]
+then
+ echo "Installing kubectl"
+ curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+ chmod +x ./kubectl
+ sudo mv ./kubectl /usr/local/bin/kubectl
+fi
+
+
+EKS_CLUSTER=`aws eks list-clusters --output text | awk '{print $2}'|tail -1`
+aws eks update-kubeconfig --name $EKS_CLUSTER
+
 
 
