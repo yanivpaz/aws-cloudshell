@@ -50,3 +50,6 @@ EKS_CLUSTER=`aws eks list-clusters --output text |tail -1 | awk '{print $2}'|tai
 KUBECONFIG="aws eks update-kubeconfig --name $EKS_CLUSTER"
 eval echo $KUBECONFIG
 
+# example
+# awslogs get scheduler-instance-logs -S  -G --timestamp -w
+
