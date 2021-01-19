@@ -19,6 +19,15 @@ then
 fi
 
 
+if [ ! -f /usr/local/bin/eksctl ]
+then
+ echo "Installing eksctl"
+ curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+ sudo mv /tmp/eksctl /usr/local/bin
+fi 
+
+
+
 EKS_CLUSTER=`aws eks list-clusters --output text | awk '{print $2}'|tail -1`
 aws eks update-kubeconfig --name $EKS_CLUSTER
 
