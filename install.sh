@@ -21,3 +21,6 @@ fi
 
 EKS_CLUSTER=`aws eks list-clusters --output text | awk '{print $2}'|tail -1`
 aws eks update-kubeconfig --name $EKS_CLUSTER
+
+
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
