@@ -27,9 +27,22 @@ then
 fi 
 
 
+if [ ! -f /usr/local/bin/scheduler-cli ]
+then
+ curl -LO https://s3.amazonaws.com/solutions-reference/aws-instance-scheduler/latest/scheduler-cli.zip
+ sudo apt install unzip
+ unzip scheduler-cli.zip
+ sudo -E python3 setup.py install
+ rm -f scheduler-cli.zip
+fi 
 
-EKS_CLUSTER=`aws eks list-clusters --output text | awk '{print $2}'|tail -1`
-aws eks update-kubeconfig --name $EKS_CLUSTER
 
+if [ ! -d ~/.oh-my-zsh ]
+then 
+ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi 
 
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+EKS_CLUSTER=`aws eks list-clusters --output text |tail -1 | awk '{print $2}'|tail -1`
+KUBECONFIG="aws eks update-kubeconfig --name $EKS_CLUSTER"
+eval echo $KUBECONFIG
+
