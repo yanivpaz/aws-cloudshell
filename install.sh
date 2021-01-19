@@ -8,7 +8,6 @@ then
  sudo mv ./kubectl /usr/local/bin/kubectl
 fi
 
-
 if [ ! -f /usr/local/bin/helm ]
 then
  echo "Installing helm"
@@ -36,6 +35,11 @@ then
  rm -f scheduler-cli.zip
 fi 
 
+if [ ! -f /usr/local/bin/awslogs ]
+then
+ echo "Installing awslogs"
+ sudo pip3 install awslogs
+fi
 
 if [ ! -d ~/.oh-my-zsh ]
 then 
