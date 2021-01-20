@@ -28,7 +28,8 @@ fi
 
 if [ ! -f /usr/local/bin/scheduler-cli ]
 then
- curl -LO https://s3.amazonaws.com/solutions-reference/aws-instance-scheduler/latest/scheduler-cli.zip
+sudo pip3 install --upgrade --force-reinstall setuptools
+  curl -LO https://s3.amazonaws.com/solutions-reference/aws-instance-scheduler/latest/scheduler-cli.zip
  unzip -o scheduler-cli.zip
  sudo -E python3 setup.py install
  rm -f scheduler-cli.zip
