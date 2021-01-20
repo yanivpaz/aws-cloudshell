@@ -1,3 +1,5 @@
+# Quick script to install relevant software in cloudshell 
+# run the following command :
 # curl -s https://raw.githubusercontent.com/yanivpaz/aws-cloudshell/main/install.sh |bash
 
 if [ ! -f /usr/local/bin/kubectl ]
