@@ -53,6 +53,7 @@ then
  K9S_PATH=`curl -sL  https://github.com/derailed/k9s/releases/latest | grep Linux_x86 | grep releases | cut -d'"' -f2`
  curl -L https://github.com/$K9S_PATH -o k9s
  sudo mv k9s /usr/local/bin
+ sudo chmod 755 /usr/local/bin/k9s
 fi
 
 EKS_CLUSTER=`aws eks list-clusters --output text |tail -1 | awk '{print $2}'|tail -1`
