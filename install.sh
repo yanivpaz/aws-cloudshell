@@ -48,6 +48,13 @@ then
  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi 
 
+if [ ! -f /usr/local/bin/k9s ]
+then
+ K9S_PATH=`curl -sL  https://github.com/derailed/k9s/releases/latest | grep Linux_x86 | grep releases | cut -d'"' -f2`
+ curl -L https://github.com/$K9S_PATH -o k9s
+ sudo mv k9s /usr/local/bin
+fi
+
 EKS_CLUSTER=`aws eks list-clusters --output text |tail -1 | awk '{print $2}'|tail -1`
 KUBECONFIG="aws eks update-kubeconfig --name $EKS_CLUSTER"
 eval echo $KUBECONFIG
