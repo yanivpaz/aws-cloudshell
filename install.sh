@@ -50,10 +50,11 @@ fi
 
 if [ ! -f /usr/local/bin/k9s ]
 then
- K9S_PATH=`curl -sL  https://github.com/derailed/k9s/releases/latest | grep Linux_x86 | grep releases | cut -d'"' -f2`
- curl -L https://github.com/$K9S_PATH -o k9s
+ export K9S_PATH=`curl -sL  https://github.com/derailed/k9s/releases/latest | grep Linux_x86 | grep releases | cut -d'"' -f2`
+ curl -L https://github.com/$K9S_PATH -o k9s.tar.gz
+ tar xvf k9s.tar.gz
  sudo mv k9s /usr/local/bin
- sudo chmod 755 /usr/local/bin/k9s
+ rm -rf k9s.tar.gz
 fi
 
 EKS_CLUSTER=`aws eks list-clusters --output text |tail -1 | awk '{print $2}'|tail -1`
